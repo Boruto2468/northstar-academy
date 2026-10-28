@@ -1,0 +1,3 @@
+export type TopicProgress={score:number;streak:number;bestLevel:string;needsPractice:string[];lastPractised:number;attempts:number};
+export interface ProgressStorage{read():Record<string,TopicProgress>;write(data:Record<string,TopicProgress>):void;history():string[];saveHistory(ids:string[]):void}
+export const localProgress:ProgressStorage={read(){try{return JSON.parse(localStorage.getItem('northstar-progress')||'{}')}catch{return {}}},write(data){localStorage.setItem('northstar-progress',JSON.stringify(data))},history(){try{return JSON.parse(localStorage.getItem('northstar-history')||'[]')}catch{return []}},saveHistory(ids){localStorage.setItem('northstar-history',JSON.stringify(ids.slice(-350)))}};
