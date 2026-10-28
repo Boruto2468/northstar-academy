@@ -38,8 +38,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Let x = 0.333…",
             "10x = 3.333…",
             "9x = 3, so x = 1/3."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s1-intermediate",
@@ -52,8 +51,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Use 100x−x.",
           "solution": [
             "99x=18, x=18/99=2/11."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s1-hard",
@@ -66,8 +64,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Subtract x from 10x then solve.",
           "solution": [
             "10x−x=1.5, so x=1/6."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -107,8 +104,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "First significant digit is 4.",
             "The third significant digit is 8, so round 7 up.",
             "Answer: 0.0048."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s2-intermediate",
@@ -121,8 +117,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Start at 8.",
           "solution": [
             "8,7,6 then next 5 rounds 6 to 7."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s2-hard",
@@ -135,8 +130,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Rounding can change place value.",
           "solution": [
             "9995 → 10000 to 3 s.f."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -176,8 +170,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Keep 3 and 6 after the decimal.",
             "The next digit is 8: round 6 up.",
             "Answer 17.37."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s3-intermediate",
@@ -190,8 +183,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Keep two places after carrying.",
           "solution": [
             "6.995 rounds to 7.00."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s3-hard",
@@ -204,8 +196,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Third decimal is 9; next 9 rounds up.",
           "solution": [
             "0.09996 → 0.100."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -245,8 +236,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "48.7 ≈ 50 and 19.8 ≈ 20.",
             "50 × 20 = 1000.",
             "The exact answer should be near 1000."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s4-intermediate",
@@ -259,8 +249,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Round to 0.05 and 2000.",
           "solution": [
             "0.05 × 2000=100."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "decimals-s4-hard",
@@ -273,8 +262,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Round 500×20÷0.5.",
           "solution": [
             "500×20÷0.5=20000."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -316,8 +304,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "180 = 18 × 10.",
             "18 = 2 × 3² and 10 = 2 × 5.",
             "180 = 2² × 3² × 5."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "special-numbers-s1-intermediate",
@@ -332,8 +319,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "180 = 18 × 10.",
             "18 = 2 × 3² and 10 = 2 × 5.",
             "180 = 2² × 3² × 5."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "special-numbers-s1-hard",
@@ -348,8 +334,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "180 = 18 × 10.",
             "18 = 2 × 3² and 10 = 2 × 5.",
             "180 = 2² × 3² × 5."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -389,8 +374,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "72 = 2³ × 3²; 120 = 2³ × 3 × 5.",
             "Common factors: 2³ × 3.",
             "HCF = 24."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "special-numbers-s2-intermediate",
@@ -405,8 +389,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "72 = 2³ × 3²; 120 = 2³ × 3 × 5.",
             "Common factors: 2³ × 3.",
             "HCF = 24."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "special-numbers-s2-hard",
@@ -421,8 +404,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "72 = 2³ × 3²; 120 = 2³ × 3 × 5.",
             "Common factors: 2³ × 3.",
             "HCF = 24."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -462,8 +444,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "12 = 2² × 3; 18 = 2 × 3².",
             "LCM = 2² × 3².",
             "Answer 36."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "special-numbers-s3-intermediate",
@@ -478,8 +459,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "12 = 2² × 3; 18 = 2 × 3².",
             "LCM = 2² × 3².",
             "Answer 36."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "special-numbers-s3-hard",
@@ -494,8 +474,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "12 = 2² × 3; 18 = 2 × 3².",
             "LCM = 2² × 3².",
             "Answer 36."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -537,8 +516,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 is not a perfect square.",
             "Its square root cannot be written as a ratio of integers.",
             "Keep the exact symbol √2."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "surds-s1-intermediate",
@@ -553,8 +531,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 is not a perfect square.",
             "Its square root cannot be written as a ratio of integers.",
             "Keep the exact symbol √2."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "surds-s1-hard",
@@ -569,8 +546,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 is not a perfect square.",
             "Its square root cannot be written as a ratio of integers.",
             "Keep the exact symbol √2."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -610,8 +586,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "98 = 49 × 2.",
             "√98 = √49 × √2.",
             "Answer 7√2."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "surds-s2-intermediate",
@@ -626,8 +601,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "98 = 49 × 2.",
             "√98 = √49 × √2.",
             "Answer 7√2."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "surds-s2-hard",
@@ -642,8 +616,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "98 = 49 × 2.",
             "√98 = √49 × √2.",
             "Answer 7√2."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -683,8 +656,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Multiply numerator and denominator by √3.",
             "5√3/(√3 × √3).",
             "Answer 5√3/3."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "surds-s3-intermediate",
@@ -699,8 +671,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Multiply numerator and denominator by √3.",
             "5√3/(√3 × √3).",
             "Answer 5√3/3."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "surds-s3-hard",
@@ -715,8 +686,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Multiply numerator and denominator by √3.",
             "5√3/(√3 × √3).",
             "Answer 5√3/3."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -758,8 +728,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Cross-products: 2 × 5 = 10; 3 × 3 = 9.",
             "10 > 9.",
             "Therefore 2/3 > 3/5."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s1-intermediate",
@@ -774,8 +743,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Cross-products: 2 × 5 = 10; 3 × 3 = 9.",
             "10 > 9.",
             "Therefore 2/3 > 3/5."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s1-hard",
@@ -790,8 +758,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Cross-products: 2 × 5 = 10; 3 × 3 = 9.",
             "10 > 9.",
             "Therefore 2/3 > 3/5."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -831,8 +798,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "64 ÷ 8 = 8.",
             "8 × 5 = 40.",
             "Answer 40."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s2-intermediate",
@@ -847,8 +813,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "64 ÷ 8 = 8.",
             "8 × 5 = 40.",
             "Answer 40."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s2-hard",
@@ -863,8 +828,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "64 ÷ 8 = 8.",
             "8 × 5 = 40.",
             "Answer 40."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -904,8 +868,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Common denominator is 12.",
             "8/12 + 3/12 = 11/12.",
             "Answer 11/12."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s3-intermediate",
@@ -920,8 +883,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Common denominator is 12.",
             "8/12 + 3/12 = 11/12.",
             "Answer 11/12."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s3-hard",
@@ -936,8 +898,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Common denominator is 12.",
             "8/12 + 3/12 = 11/12.",
             "Answer 11/12."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -977,8 +938,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Invert 2/5 to 5/2.",
             "3/4 × 5/2 = 15/8.",
             "Answer 1 7/8."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s4-intermediate",
@@ -993,8 +953,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Invert 2/5 to 5/2.",
             "3/4 × 5/2 = 15/8.",
             "Answer 1 7/8."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s4-hard",
@@ -1009,8 +968,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Invert 2/5 to 5/2.",
             "3/4 × 5/2 = 15/8.",
             "Answer 1 7/8."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1050,8 +1008,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 × 5 + 3 = 13.",
             "Keep denominator 5.",
             "Answer 13/5."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s5-intermediate",
@@ -1066,8 +1023,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 × 5 + 3 = 13.",
             "Keep denominator 5.",
             "Answer 13/5."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "fractions-s5-hard",
@@ -1082,8 +1038,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 × 5 + 3 = 13.",
             "Keep denominator 5.",
             "Answer 13/5."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -1125,8 +1080,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "17.5% = 0.175.",
             "0.175 × 240 = 42.",
             "Answer £42."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s1-intermediate",
@@ -1139,8 +1093,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Multiply both change factors.",
           "solution": [
             "160 × 0.875 × 1.1 = 154."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s1-hard",
@@ -1153,8 +1106,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Apply both multipliers in order.",
           "solution": [
             "480 × 0.8 × 1.25 = 480."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1194,8 +1146,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "18 ÷ 45 = 0.4.",
             "0.4 × 100 = 40.",
             "Answer 40%."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s2-intermediate",
@@ -1208,8 +1159,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Part ÷ whole × 100.",
           "solution": [
             "27 ÷ 90 × 100 = 30%."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s2-hard",
@@ -1222,8 +1172,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Compare the increase to the ORIGINAL size.",
           "solution": [
             "12 ÷ 32 × 100 = 37.5%."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1263,8 +1212,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Multiplier = 0.85.",
             "360 × 0.85 = 306.",
             "Answer £306."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s3-intermediate",
@@ -1277,8 +1225,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Multiply by 0.85 and 1.05.",
           "solution": [
             "240 × 0.85 × 1.05 = 214.2."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s3-hard",
@@ -1291,8 +1238,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Percentages do not add: multiply.",
           "solution": [
             "400 × 1.25 × 0.8 = 400."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1332,8 +1278,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Final multiplier = 1.2.",
             "Original = 144 ÷ 1.2.",
             "Answer £120."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s4-intermediate",
@@ -1346,8 +1291,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Final is 88% of original.",
           "solution": [
             "264 ÷ 0.88 = 300."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s4-hard",
@@ -1360,8 +1304,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Divide by both multipliers.",
           "solution": [
             "216 ÷ (1.2 × 0.9) = 200."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1401,8 +1344,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Multiplier = 1.08.",
             "500 × 1.08³ = 629.856.",
             "To the nearest penny £629.86."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s5-intermediate",
@@ -1415,8 +1357,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Use a power of 3.",
           "solution": [
             "500 × 1.04³ = 562.432 → £562.43."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s5-hard",
@@ -1429,8 +1370,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Solve 1.25(1−p/100)=1.",
           "solution": [
             "1/1.25=0.8, so p=20%."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1470,8 +1410,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Multiplier = 0.85.",
             "1200 × 0.85² = 867.",
             "Value £867."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s6-intermediate",
@@ -1484,8 +1423,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Use 0.9 cubed.",
           "solution": [
             "2000 × 0.9³ = 1458."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "percentages-s6-hard",
@@ -1498,8 +1436,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Find square root of 1.21.",
           "solution": [
             "(1+r/100)²=1.21; r=10%."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -1541,8 +1478,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "HCF = 15.",
             "45÷15 : 60÷15.",
             "Answer 3:4."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s1-intermediate",
@@ -1557,8 +1493,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "HCF = 15.",
             "45÷15 : 60÷15.",
             "Answer 3:4."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s1-hard",
@@ -1573,8 +1508,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "HCF = 15.",
             "45÷15 : 60÷15.",
             "Answer 3:4."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1614,8 +1548,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Total 7 parts.",
             "Each part £60.",
             "Shares £120 and £300."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s2-intermediate",
@@ -1630,8 +1563,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Total 7 parts.",
             "Each part £60.",
             "Shares £120 and £300."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s2-hard",
@@ -1646,8 +1578,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Total 7 parts.",
             "Each part £60.",
             "Shares £120 and £300."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1687,8 +1618,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "k = 18/6 = 3.",
             "y=3x.",
             "y=33."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s3-intermediate",
@@ -1703,8 +1633,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "k = 18/6 = 3.",
             "y=3x.",
             "y=33."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s3-hard",
@@ -1719,8 +1648,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "k = 18/6 = 3.",
             "y=3x.",
             "y=33."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1760,8 +1688,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 h = 120 min.",
             "120 + 35 = 155.",
             "Answer 155 min."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s4-intermediate",
@@ -1776,8 +1703,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 h = 120 min.",
             "120 + 35 = 155.",
             "Answer 155 min."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "ratio-proportion-s4-hard",
@@ -1792,8 +1718,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "2 h = 120 min.",
             "120 + 35 = 155.",
             "Answer 155 min."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -1835,8 +1760,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Add indices 5 + (−3) = 2.",
             "2² = 4.",
             "Answer 4."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "indices-standard-form-s1-intermediate",
@@ -1851,8 +1775,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Add indices 5 + (−3) = 2.",
             "2² = 4.",
             "Answer 4."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "indices-standard-form-s1-hard",
@@ -1867,8 +1790,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Add indices 5 + (−3) = 2.",
             "2² = 4.",
             "Answer 4."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1906,8 +1828,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "solution": [
             "Multiply exponents 3 × 4.",
             "Answer x¹²."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "indices-standard-form-s2-intermediate",
@@ -1921,8 +1842,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "solution": [
             "Multiply exponents 3 × 4.",
             "Answer x¹²."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "indices-standard-form-s2-hard",
@@ -1936,8 +1856,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "solution": [
             "Multiply exponents 3 × 4.",
             "Answer x¹²."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -1977,8 +1896,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Move the decimal 5 places right to get 7.2.",
             "Compensate with 10⁻⁵.",
             "7.2×10⁻⁵."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "indices-standard-form-s3-intermediate",
@@ -1993,8 +1911,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Move the decimal 5 places right to get 7.2.",
             "Compensate with 10⁻⁵.",
             "7.2×10⁻⁵."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "indices-standard-form-s3-hard",
@@ -2009,8 +1926,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Move the decimal 5 places right to get 7.2.",
             "Compensate with 10⁻⁵.",
             "7.2×10⁻⁵."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -2052,8 +1968,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Half unit = 0.05.",
             "7.35 ≤ m < 7.45.",
             "Lower 7.35, upper 7.45."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "degree-accuracy-s1-intermediate",
@@ -2068,8 +1983,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Half unit = 0.05.",
             "7.35 ≤ m < 7.45.",
             "Lower 7.35, upper 7.45."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "degree-accuracy-s1-hard",
@@ -2084,8 +1998,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Half unit = 0.05.",
             "7.35 ≤ m < 7.45.",
             "Lower 7.35, upper 7.45."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2125,8 +2038,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Upper length 5.5; upper width 3.5.",
             "5.5×3.5=19.25.",
             "The area is less than 19.25."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "degree-accuracy-s2-intermediate",
@@ -2141,8 +2053,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Upper length 5.5; upper width 3.5.",
             "5.5×3.5=19.25.",
             "The area is less than 19.25."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "degree-accuracy-s2-hard",
@@ -2157,8 +2068,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Upper length 5.5; upper width 3.5.",
             "5.5×3.5=19.25.",
             "The area is less than 19.25."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -2200,8 +2110,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Find elements present in both.",
             "4 and 6 occur in both.",
             "A∩B={4,6}."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s1-intermediate",
@@ -2214,8 +2123,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Subtract the overlap once.",
           "solution": [
             "22+17−8=31."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s1-hard",
@@ -2228,8 +2136,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Rearrange inclusion-exclusion.",
           "solution": [
             "28+25−40=13."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2269,8 +2176,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Remove members of A from U.",
             "Remaining {1,3,5}.",
             "A′={1,3,5}."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s2-intermediate",
@@ -2283,8 +2189,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Subtract from U.",
           "solution": [
             "65−38=27."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s2-hard",
@@ -2297,8 +2202,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Find union first.",
           "solution": [
             "80−(44+36−15)=15."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2338,8 +2242,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Only football 17; only tennis 10.",
             "Union = 17+8+10 = 35.",
             "Total = 35+5 = 40."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s3-intermediate",
@@ -2352,8 +2255,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Union = total − neither.",
           "solution": [
             "24+21−(45−7)=7."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s3-hard",
@@ -2366,8 +2268,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Subtract union from sum.",
           "solution": [
             "62+48−75=35."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2407,8 +2308,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "A has 12+8=20.",
             "P(A)=20/30.",
             "Answer 2/3."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s4-intermediate",
@@ -2421,8 +2321,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "Count union then divide by 50.",
           "solution": [
             "(30+25−15)/50=40/50=4/5."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "sets-venn-s4-hard",
@@ -2435,8 +2334,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
           "hint": "First find union=60.",
           "solution": [
             "Intersection=45+50−60=35; 35/80=7/16."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
@@ -2478,8 +2376,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "4x−x=3x.",
             "3y+2y=5y.",
             "Answer 3x+5y."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s1-intermediate",
@@ -2494,8 +2391,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "4x−x=3x.",
             "3y+2y=5y.",
             "Answer 3x+5y."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s1-hard",
@@ -2510,8 +2406,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "4x−x=3x.",
             "3y+2y=5y.",
             "Answer 3x+5y."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2551,8 +2446,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "−3×2x=−6x.",
             "−3×−5=+15.",
             "Answer −6x+15."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s2-intermediate",
@@ -2567,8 +2461,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "−3×2x=−6x.",
             "−3×−5=+15.",
             "Answer −6x+15."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s2-hard",
@@ -2583,8 +2476,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "−3×2x=−6x.",
             "−3×−5=+15.",
             "Answer −6x+15."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2624,8 +2516,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "HCF = 6x.",
             "12x²÷6x=2x, −18x÷6x=−3.",
             "Answer 6x(2x−3)."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s3-intermediate",
@@ -2640,8 +2531,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "HCF = 6x.",
             "12x²÷6x=2x, −18x÷6x=−3.",
             "Answer 6x(2x−3)."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s3-hard",
@@ -2656,8 +2546,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "HCF = 6x.",
             "12x²÷6x=2x, −18x÷6x=−3.",
             "Answer 6x(2x−3)."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2697,8 +2586,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "x²−5x+3x−15.",
             "Combine middle terms.",
             "x²−2x−15."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s4-intermediate",
@@ -2713,8 +2601,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "x²−5x+3x−15.",
             "Combine middle terms.",
             "x²−2x−15."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s4-hard",
@@ -2729,8 +2616,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "x²−5x+3x−15.",
             "Combine middle terms.",
             "x²−2x−15."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     },
@@ -2770,8 +2656,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Find 3 and 4: sum 7, product 12.",
             "Write (x+3)(x+4).",
             "Check expansion."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s5-intermediate",
@@ -2786,8 +2671,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Find 3 and 4: sum 7, product 12.",
             "Write (x+3)(x+4).",
             "Check expansion."
-          ],
-          "generator": undefined
+          ]
         },
         {
           "id": "algebra-s5-hard",
@@ -2802,8 +2686,7 @@ export const expandedCurriculum: Record<string, Subtopic[]> = {
             "Find 3 and 4: sum 7, product 12.",
             "Write (x+3)(x+4).",
             "Check expansion."
-          ],
-          "generator": undefined
+          ]
         }
       ]
     }
