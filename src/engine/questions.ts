@@ -2,6 +2,7 @@ import type {Question} from '@/types/topic';
 export function rng(seed:number){let s=seed>>>0;return ()=>{s+=0x6D2B79F5;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296}}
 export const pick=(r:()=>number,min:number,max:number)=>min+Math.floor(r()*(max-min+1));
 export function instantiate(q:Question,r:()=>number):Question{
+ if(q.generator==='curriculum'||(!q.generator && q.subtopicId)) return q;
  const a=pick(r,2,12),b=pick(r,2,9),p=pick(r,1,9)*10; let prompt=q.prompt,answer=q.answer,solution=q.solution;
  switch(q.generator){
  case 'percentage-of':prompt=`Find ${p}% of ${a*10}.`;answer=String(p*a/10);solution=[`${p}% = ${p}/100`,`(${p}/100) × ${a*10} = ${answer}`];break;
