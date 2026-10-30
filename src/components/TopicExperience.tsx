@@ -9,11 +9,12 @@ import DetailedCellDiagram from './DetailedCellDiagram';
 import ScientificPlates from './ScientificPlates';
 import ExperimentalLab from './ExperimentalLab';
 import Celebration from './Celebration';
+import MathsExperience from './MathsExperience';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 const levels:Level[]=['simple','intermediate','hard'];
 function Formula({value}:{value:string}){const html=useMemo(()=>{try{return katex.renderToString(value,{throwOnError:false,displayMode:true,strict:'ignore'})}catch{return value}},[value]);return <div className="formula" dangerouslySetInnerHTML={{__html:html}}/>}
-export default function TopicExperience({topic}:{topic:Topic}){
+function BiologyTopicExperience({topic}:{topic:Topic}){
  const subtopics=topic.subtopics??[];
  const [active,setActive]=useState(subtopics[0]?.id??'mixed');
  const [exampleIndex,setExampleIndex]=useState(0),[exampleStep,setExampleStep]=useState(0);
@@ -40,3 +41,5 @@ export default function TopicExperience({topic}:{topic:Topic}){
   <div className="settings"><label><input type="checkbox" checked={settings.animation} onChange={e=>{const s={...settings,animation:e.target.checked};setSettings(s);localStorage.setItem('northstar-settings',JSON.stringify(s))}}/> Animations</label><label><input type="checkbox" checked={settings.lowData} onChange={e=>{const s={...settings,lowData:e.target.checked};setSettings(s);localStorage.setItem('northstar-settings',JSON.stringify(s))}}/> Low-data mode</label><span>Progress stays on this device.</span></div>
  </div>
 }
+
+export default function TopicExperience({topic}:{topic:Topic}){return topic.subject==='maths'?<MathsExperience topic={topic}/>:<BiologyTopicExperience topic={topic}/>;}
