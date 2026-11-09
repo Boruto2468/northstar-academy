@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test:maths": "node --experimental-strip-types --test tests/math-generator.test.mjs tests/math-answer-validation.test.mjs tests/math-review.test.mjs"
+    "test:maths": "node --experimental-strip-types --test tests/math-generator.test.mjs tests/math-answer-validation.test.mjs tests/math-review.test.mjs",
+    "test:assessment": "node --experimental-strip-types --test tests/assessment-items.test.mjs tests/assessment-security.test.mjs",
+    "test": "npm run test:maths && npm run test:assessment"
   },
   "dependencies": {
     "next": "^15.5.0",
@@ -18,12 +20,15 @@
     "mathjs": "^14.0.0",
     "katex": "^0.16.0",
     "react-katex": "^3.1.0",
-    "lucide-react": "^0.468.0"
+    "lucide-react": "^0.468.0",
+    "pg": "^8.13.0",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react-dom": "^19.0.0",
+    "@types/pg": "^8.11.11"
   },
   "engines": {
     "node": ">=22.0.0"

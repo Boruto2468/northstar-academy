@@ -1,0 +1,2 @@
+import {currentUser,HttpError} from '@/server/auth';import {body,respond,str} from '@/server/http';import {saveAnswer} from '@/server/assessments';
+export const runtime='nodejs';export async function POST(req:Request,{params}:{params:Promise<{id:string}>}){return respond(async()=>{const u=await currentUser(req),d=await body(req,10000);if(!d.response||typeof d.response!=='object'||Array.isArray(d.response))throw new HttpError(400,'Invalid response');return saveAnswer(u,(await params).id,str(d.itemId,60),d.response as Record<string,unknown>);});}

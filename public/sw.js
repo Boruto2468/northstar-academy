@@ -1,6 +1,6 @@
 /* Network-first for HTML so new lessons and bug fixes reach installed PWA users.
    Hashed static assets remain cached for offline use. */
-const CACHE = 'northstar-learning-v4';
+const CACHE = 'northstar-learning-v6';
 self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
@@ -12,6 +12,9 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const request=event.request;
   if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;
+  const path=new URL(request.url).pathname;
+  // Never cache authentication, exams, responses, student records or teacher pages.
+  if(/^\/(api|login|tests|exams|attempts|teacher)(\/|$)/.test(path))return;
   const navigation=request.mode==='navigate'||request.destination==='document';
   if(navigation){
     event.respondWith((async()=>{

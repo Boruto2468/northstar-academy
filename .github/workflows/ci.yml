@@ -1,0 +1,22 @@
+name: Validate Northstar Academy
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install --no-audit --no-fund; fi
+      - run: npm test
+      - run: npm run build
+        env:
+          DATABASE_URL: postgresql://example:example@localhost:5432/northstar?sslmode=require
+          CRON_SECRET: validation-only-not-a-live-secret
