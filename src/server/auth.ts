@@ -4,6 +4,7 @@ import {sha256,token,hashPassword,checkPassword} from './security';
 import type {PoolClient} from 'pg';
 export type CurrentUser={id:string;username:string;displayName:string;role:'teacher'|'student'};
 export class HttpError extends Error{constructor(public status:number,message:string){super(message);}}
+export const DELETED_ACCOUNT_PASSWORD_HASH='!account-deleted!';
 function userOf(row:Record<string,unknown>):CurrentUser{return {id:String(row.id),username:String(row.username),displayName:String(row.display_name),role:row.role as 'teacher'|'student'};}
 function bearer(req:Request):string{const auth=req.headers.get('authorization')||'';return /^Bearer [A-Za-z0-9_-]{40,100}$/.test(auth)?auth.slice(7):'';}
 export async function currentUser(req:Request):Promise<CurrentUser>{
@@ -45,7 +46,19 @@ export async function createStudent(creatorId:string,usernameInput:string,displa
  const passwordHash=await hashPassword(password);
  try{const {rows}=await db().query(`INSERT INTO users(username,display_name,role,password_hash,created_by) VALUES($1,$2,'student',$3,$4)
  RETURNING id,username,display_name,role`,[username,displayName,passwordHash,creatorId]);return userOf(rows[0]);}
- catch(e){if((e as {code?:string}).code==='23505')throw new HttpError(409,'Username already exists');throw e;}
+ catch(e){if((e as {code?:string}).code==='23505')throw new HttpError(409,'That username is already in use. If it belongs to a deactivated account, reactivate that account or choose another username.');throw e;}
+}
+export async function permanentlyRemoveStudent(client:PoolClient,studentId:string,teacherId:string){
+ const {rows}=await client.query("SELECT id FROM users WHERE id=$1 AND role='student' AND password_hash<>$2 FOR UPDATE",[studentId,DELETED_ACCOUNT_PASSWORD_HASH]);
+ if(!rows[0])throw new HttpError(404,'Student account not found or already removed');
+ const {rows:chatTables}=await client.query("SELECT to_regclass('public.chat_threads') IS NOT NULL AS installed");
+ if(chatTables[0]?.installed)await client.query('DELETE FROM chat_threads WHERE student_id=$1',[studentId]);
+ await client.query('DELETE FROM sessions WHERE user_id=$1',[studentId]);
+ await client.query('DELETE FROM used_questions WHERE user_id=$1',[studentId]);
+ const anonymizedUsername=`deleted-${studentId.replace(/-/g,'').slice(0,28)}`;
+ await client.query("UPDATE users SET username=$2,display_name='Deleted student',password_hash=$3,active=false WHERE id=$1",[studentId,anonymizedUsername,DELETED_ACCOUNT_PASSWORD_HASH]);
+ await audit(client,teacherId,'student_account_removed',studentId);
+ return {removed:true};
 }
 export async function audit(client:PoolClient,actorId:string,action:string,targetId:string|null,details:unknown={}){
  await client.query('INSERT INTO audit_events(actor_id,action,target_id,details) VALUES($1,$2,$3,$4::jsonb)',[actorId,action,targetId,JSON.stringify(details)]);

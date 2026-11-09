@@ -1,0 +1,5 @@
+import {test} from 'node:test';import {strict as assert} from 'node:assert';
+import {biologyVideos,videosFor} from '../src/data/biologyVideos.ts';
+test('all six Biology topics have overview entries',()=>{assert.equal(Object.keys(biologyVideos).length,6);for(const [key,v] of Object.entries(biologyVideos)){assert.ok(videosFor(key).length>0);assert.ok(v.overview.length<=3);}});
+test('every subtopic has an explicit link list or intentionally empty placeholder',()=>{const counts=[4,4,4,4,3,3];Object.values(biologyVideos).forEach((t,i)=>{assert.equal(Object.keys(t.subtopics).length,counts[i]);for(const l of Object.values(t.subtopics))assert.ok(Array.isArray(l)&&l.length<=3);});});
+test('each YouTube URL is complete and safe',()=>{for(const t of Object.values(biologyVideos))for(const list of [t.overview,...Object.values(t.subtopics)])for(const v of list){const u=new URL(v.url);assert.equal(u.origin,'https://www.youtube.com');assert.equal(u.pathname,'/watch');assert.match(u.searchParams.get('v')||'',/^[A-Za-z0-9_-]{11}$/);assert.ok(v.title&&v.channel&&v.length);}});

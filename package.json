@@ -8,7 +8,10 @@
     "start": "next start",
     "test:maths": "node --experimental-strip-types --test tests/math-generator.test.mjs tests/math-answer-validation.test.mjs tests/math-review.test.mjs",
     "test:assessment": "node --experimental-strip-types --test tests/assessment-items.test.mjs tests/assessment-security.test.mjs",
-    "test": "npm run test:maths && npm run test:assessment"
+    "test": "npm run test:maths && npm run test:assessment && npm run test:chat",
+    "test:chat": "node --experimental-strip-types --test tests/chat-policy.test.mjs tests/biology-videos.test.mjs",
+    "videos:check": "node --experimental-strip-types scripts/check-biology-videos.mjs",
+    "videos:check:offline": "node --experimental-strip-types scripts/check-biology-videos.mjs --offline"
   },
   "dependencies": {
     "next": "^15.5.0",

@@ -1,3 +1,3 @@
-import type {Metadata} from 'next';import './globals.css';import {PwaRegistration} from '@/components/PwaRegistration';import AccountNav from '@/components/assessments/AccountNav';
+import type {Metadata} from 'next';import './globals.css';import {PwaRegistration} from '@/components/PwaRegistration';import AccountNav from '@/components/assessments/AccountNav';import ChatLauncher from '@/components/chat/ChatLauncher';import TeacherPresence from '@/components/chat/TeacherPresence';
 export const metadata:Metadata={title:'Northstar Academy | Year 10',description:'Interactive Year 10 Maths and Biology learning, practice and revision.',manifest:'/manifest.webmanifest'};
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><PwaRegistration/><AccountNav/>{children}</body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><PwaRegistration/><AccountNav/><TeacherPresence/>{children}<ChatLauncher/></body></html>}

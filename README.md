@@ -15,4 +15,4 @@ npm run dev
 
 Routes: `/` (lessons), `/tests` (student timed practice), `/exams` (teacher-scheduled exams), `/login`, `/teacher` (teacher administration).
 
-**Privacy:** The database stores child accounts using only usernames/display names; credentials and private marking data stay on the server. Keep `.env.local` out of version control.
+**Privacy:** The database stores child accounts using only usernames/display names; credentials and private marking data stay on the server. Teachers can permanently remove a student from `/teacher`: sign-in is disabled, identifying account details and chat history are erased, and assessment records remain anonymized. The username is freed for reuse. Keep `.env.local` out of version control.
