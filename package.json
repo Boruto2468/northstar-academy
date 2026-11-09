@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test:maths": "node --experimental-strip-types --test tests/math-generator.test.mjs"
+    "test:maths": "node --experimental-strip-types --test tests/math-generator.test.mjs tests/math-answer-validation.test.mjs tests/math-review.test.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
@@ -24,5 +24,8 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }

@@ -113,7 +113,7 @@ function reference(kind,p){
  default:throw Error(`No independent oracle for ${kind}`);
  }
 }
-function safeValue(value,x){const src=value.replace(/\^/g,'**').replace(/sqrt\(/g,'Math.sqrt(');assert.match(src,/^[\d\sxy()+*./\-Mathsqrt]+$/);return Function('x','y',`return (${src})`)(x,3)}
+function safeValue(value,x){const src=value.replace(/\^/g,'**').replace(/sqrt\(/g,'Math.sqrt(');assert.match(src,/^[\d\sxy()+*./\-MathsqrteE]+$/);return Function('x','y',`return (${src})`)(x,3)}
 function close(a,b,ctx){assert.ok(Number.isFinite(a)&&Number.isFinite(b),`${ctx}: non-finite ${a}/${b}`);assert.ok(Math.abs(a-b)<=1e-7*Math.max(1,Math.abs(a),Math.abs(b)),`${ctx}: expected ${b}, got ${a}`)}
 function checkGenerated(kind,q){const p=q.params;const base=reference(kind,p);if(kind==='ratio.simplify'){
   assert.equal(q.correctAnswer,base);return;

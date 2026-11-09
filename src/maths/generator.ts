@@ -1,7 +1,10 @@
 /* Pure, single-source Maths question factory. Every visible field is derived in buildQuestion
    from exactly the same immutable parameters; no question answer is stored elsewhere. */
+import {evaluateExpression,type AnswerSpec} from './answerValidation.ts';
 export type Params={a:number;b:number;c:number;d:number;n:number;stage:number};
-export type GeneratedMathQuestion={id:string;templateId:string;params:Params;promptText:string;correctAnswer:string;acceptedForms:string[];hint:[string,string];workedSolution:string[];tier:'foundation'|'developing'|'challenge'};
+export type CommonWrongAnswer={value:string;reason:string};
+export type ValidatedStep={label:string;prompt:string;correctAnswer:string;answerSpec:AnswerSpec};
+export type GeneratedMathQuestion={id:string;seed:string;templateId:string;skillId:string;params:Params;promptText:string;correctAnswer:string;acceptedForms:string[];answerSpec:AnswerSpec;validatedSteps:ValidatedStep[];commonWrongAnswers:CommonWrongAnswer[];hint:[string,string];workedSolution:string[];tier:'foundation'|'developing'|'challenge'};
 type Core={ask:string;answer:string;reason:string[];tip:string;numeric:boolean;complex?:boolean};
 const gcd=(a:number,b:number):number=>b?gcd(b,a%b):Math.abs(a);
 const f=(a:number,b:number)=>{if(b<0){a=-a;b=-b}const g=gcd(a,b);return `${a/g}/${b/g}`};
@@ -20,7 +23,7 @@ export function coreFor(kind:string,p:Params):Core {
  case 'index.zero':return p.stage>=4?val(`Calculate ${a}^0 + ${b}^0 + ${c}^0.`,3,`Each base is non-zero, so each term equals 1: 1+1+1=3.`,'Each distinct non-zero base to the power zero equals 1.'):val(`Calculate ${a}^0 + ${b}.`,1+b,`${a} is non-zero, so ${a}^0 = 1; then 1 + ${b} = ${b+1}.`,'Any non-zero base to power zero is 1.');
  case 'index.negative':return p.stage>=4?sym(`Simplify ${a}^(-${n}) × ${a}^(-${b}).`,`1/(${a}^${n+b})`,`Add the negative indices: -${n} + (-${b}) = -${n+b}; rewrite as 1/${a}^${n+b}.`,'Apply the product law, then rewrite the negative power.'):sym(`Write ${a}^(-${n}) as an exact fraction.`,f(1,a**n),`A negative index means reciprocal: 1/${a}^${n} = 1/${a**n}.`,'Take the reciprocal, then evaluate the positive power.');
  case 'index.fractional':return p.stage>=4?sym(`Evaluate (${a**n})^(-1/${n}) as a fraction.`,`1/${a}`,`The positive fractional index gives ${a}; the negative sign takes its reciprocal, 1/${a}.`,'The minus sign means take the reciprocal of the root.'):val(`Evaluate ${a**n}^(1/${n}).`,a,`The ${n}th root of ${a**n} is ${a}.`,'A fractional index of 1/n means the nth root.');
- case 'index.standard':{const coef=a>=10?a/10:a;const pow=a>=10?n+1:n;return sym(`Write ${a} × 10^${n} in standard form.`,`${coef}*10^${pow}`,`Shift the decimal until the coefficient is between 1 and 10: ${coef} × 10^${pow}.`,'The coefficient must lie between 1 and 10.');}
+ case 'index.standard':{const coef=a>=10?a/10:a;const pow=a>=10?n+1:n;return sym(a>=10?`Write ${a} × 10^${n} in standard form.`:`Write ${a*10**n} in standard form.`,`${coef}*10^${pow}`,`Shift the decimal until the coefficient is between 1 and 10: ${coef} × 10^${pow}.`,'The coefficient must lie between 1 and 10.');}
  case 'index.standardops':{const z=a*b/100;const extra=Math.floor(Math.log10(z));const coef=Number((z/10**extra).toPrecision(10));return sym(`Multiply (${a/10} × 10^${n}) by (${b/10} × 10^${c}).`, `${coef}*10^${n+c+extra}`,`Multiply coefficients (${a/10} × ${b/10}) and add the indices (${n}+${c}). Then normalise: ${coef} × 10^${n+c+extra}.`,'Combine the coefficients and powers separately.');}
  case 'decimal.recurring':return sym(`Convert 0.${String(a%9+1).repeat(3)}... to an exact fraction.`,f(a%9+1,9),`Let x = 0.${String(a%9+1).repeat(3)}...; then 10x − x = ${a%9+1}, so x = ${a%9+1}/9.`,'Subtract x from 10x to cancel the recurring part.');
  case 'decimal.sigfig':{const x=a*100+b*10+c/10;const digits=n%3+1;const power=Math.floor(Math.log10(x))-digits+1;const z=Math.round(x/10**power)*10**power;return val(`Round ${x} to ${digits} significant figures.`,z,`Keep the first ${digits} non-zero-place digits, then check the next digit. The rounded value is ${fmt(z)}.`,'Start at the first non-zero digit.');}
@@ -113,11 +116,98 @@ function advancedCore(kind:string,p:Params):Core|null {
  case 'sets.probability':{const total=a+b+c+d;return symbolic(isWord?`A group has ${total} students: ${a} take only music, ${b} take both music and art, ${c} take only art, and ${d} take neither. Find the probability a random student takes exactly one subject.`:`In a two-set Venn diagram the regions are A-only ${a}, both ${b}, B-only ${c}, neither ${d}. Find P(exactly one).`,f(a+c,total),[`Exactly one = ${a}+${c}=${a+c}.`,`Total = ${total}; probability = ${f(a+c,total)}.`],'Exactly one excludes the intersection.');}
  case 'algebra.collect':return symbolic(isWord?`Two accounts are represented by ${a}x+${b}y and ${c}x−${d}y. Combine the algebraic totals.`:`Collect like terms in ${a}x+${b}y+${c}x−${d}y.`,`${a+c}*x+${b-d}*y`,[`x coefficients: ${a}+${c}=${a+c}.`,`y coefficients: ${b}−${d}=${b-d}.`],'x terms and y terms must remain separate.');
  case 'algebra.expand':return symbolic(isWord?`Two signed changes are ${a}(${b}x+${c}) and −${d}(x+${n}). Expand and combine.`:`Simplify ${a}(${b}x+${c}) − ${d}(x+${n}).`,`${a*b-d}*x+${a*c-d*n}`,[`Expand: ${a*b}x+${a*c}−${d}x−${d*n}.`,`Collect to get ${a*b-d}x+${a*c-d*n}.`],'The minus outside the second bracket changes both signs.');
- case 'algebra.factor':return symbolic(isWord?`A design area is ${a*b}x²+${a*c}x. Factorise it completely.`:`Factorise ${a*b}x²+${a*c}x completely.`,`${a}*x*(${b}*x+${c})`,[`Both terms contain ${a}x.`,`Divide each term by ${a}x to obtain ${b}x+${c}.`],'Look for the common variable as well as the coefficient.');
+ case 'algebra.factor':return symbolic(isWord?`A design area is ${a*b}x²+${a*c}x. Factorise it completely.`:`Factorise ${a*b}x²+${a*c}x completely.`,`${a*gcd(b,c)}*x*(${b/gcd(b,c)}*x+${c/gcd(b,c)})`,[`Both terms contain ${a*gcd(b,c)}x.`,`Divide each term by ${a*gcd(b,c)}x to obtain ${b/gcd(b,c)}x+${c/gcd(b,c)}.`],'Look for the common variable as well as the coefficient.');
  case 'algebra.foil':return symbolic(isWord?`The area of a rectangle is (x+${a})(x+${b}). Another square has area x². Give the difference of areas in expanded form.`:`Expand (x+${a})(x+${b}) − x².`,`${a+b}*x+${a*b}`,[`Product = x²+${a+b}x+${a*b}.`,`Subtract x² and simplify.`],'Multiply both brackets before subtracting.');
  case 'algebra.quadratic':return symbolic(isWord?`A rectangle's area is 2x²+${2*(a+b)}x+${2*a*b}. Factorise fully.`:`Factorise 2x²+${2*(a+b)}x+${2*a*b} completely.`,`2*(x+${a})*(x+${b})`,[`Take out 2, giving x²+${a+b}x+${a*b}.`,`The pair ${a},${b} has sum ${a+b}, product ${a*b}.`],'Take out the common factor before finding the two brackets.');
  default:return null;
  }
+}
+
+/** A precise final form for the rule being assessed. An error in the form is
+ * not an incorrect mathematical attempt; it is reported separately. */
+function formFor(kind:string,p:Params):AnswerSpec {
+ const stage=p.stage;
+ if(kind==='decimal.places'&&stage<=3)return {kind:'decimal',decimalPlaces:p.n%3+1};
+ if(kind==='decimal.sigfig'&&stage<=1)return {kind:'decimal',significantFigures:p.n%3+1};
+ if(kind==='percent.as')return {kind:'decimal',decimalPlaces:2};
+ if(kind==='percent.compound'||kind==='percent.repeated'&&stage>=4)return {kind:'decimal',decimalPlaces:2};
+ if(kind==='ratio.simplify')return {kind:'ratio'};
+ if(kind==='prime.factor')return {kind:'prime-factorisation'};
+ if(kind==='index.standard'||kind==='index.standardops')return {kind:'standard-form'};
+ if(kind==='index.product'||kind==='index.quotient'||kind==='index.power')return {kind:stage<2||stage>=4?'single-power':'simplified-expression'};
+ if(kind==='index.negative'&&stage>=4)return {kind:'single-power'};
+ if(kind==='algebra.factor'||kind==='algebra.quadratic')return {kind:stage<2||stage>=4?'factorised-expression':'simplified-expression'};
+ if(['algebra.expand','algebra.foil','algebra.collect'].includes(kind))return {kind:'expanded-expression'};
+ if(kind.startsWith('algebra.'))return {kind:'simplified-expression'};
+ if(kind.startsWith('surd.'))return {kind:'surd'};
+ if(['fraction.order','fraction.add','fraction.multiply','fraction.mixed','decimal.recurring','sets.probability','index.negative','index.fractional'].includes(kind))return {kind:kind==='index.fractional'&&stage<4?'integer':'fraction'};
+ if(kind==='ratio.simplify')return {kind:'ratio'};
+ if(['index.zero','index.value','index.calculator','prime.hcf','prime.lcm','percent.of','percent.change','percent.reverse','ratio.share','ratio.direct','sets.notation','sets.complement','sets.venn','fraction.quantity','decimal.estimate'].includes(kind))return {kind:'integer'};
+ return {kind:'decimal'};
+}
+const rat=(n:bigint,d:bigint):string=>{if(d<0n){n=-n;d=-d}let a=n<0n?-n:n,b=d;while(b)[a,b]=[b,a%b];return d/a===1n?String(n/a):`${n/a}/${d/a}`};
+function addRational(coreAnswer:string,offset:number):string|null {
+ const m=/^(-?\d+)(?:\/(\d+))?$/.exec(coreAnswer);
+ if(!m)return null;
+ const den=BigInt(m[2]||'1');return rat(BigInt(m[1])+BigInt(offset)*den,den);
+}
+function standardFromNumber(value:number):string {
+ if(!Number.isFinite(value)||value===0)throw Error('Cannot represent this quantity in standard form');
+ const power=Math.floor(Math.log10(Math.abs(value)));
+ const c=Number((value/10**power).toPrecision(12));
+ return Math.abs(c)>=10?`${c/10}*10^${power+1}`:`${c}*10^${power}`;
+}
+function cleanExpanded(value:string):string {
+ const terms=value.replace(/-/g,'+-').split('+').filter(Boolean).filter(term=>!/^0(?:\*?[xy](?:\^\d+)?)?$/.test(term));
+ return terms.length?terms.join('+').replace(/\+-/g,'-'):'0';
+}
+function finalAnswer(kind:string,p:Params,answer:string,core:Core):string {
+ const spec=formFor(kind,p);
+ if(spec.kind==='standard-form')return standardFromNumber(evaluateExpression(answer));
+ if(spec.kind==='fraction'){
+  const t=/^\((-?\d+(?:\/\d+)?)\)\+\((-?\d+)\)$/.exec(answer);
+  if(t){const v=addRational(t[1],Number(t[2]));if(v)return v;}
+ }
+ if(spec.kind==='surd'&&kind==='surd.rational'&&p.stage<=1){
+  return p.a%2===0?`${p.a/2}*sqrt(2)`:`${p.a}*sqrt(2)/2`;
+ }
+ // Expanded answers must not preserve unexpanded grouping from a generated intermediate step.
+ if(spec.kind==='expanded-expression'){
+  const m=/^\((.+)\)\+\((-?\d+)\)$/.exec(answer);
+  if(m){const offset=Number(m[2]);const previous=/^(.+)\+(-?\d+)$/.exec(m[1]);
+   if(previous&&!previous[1].includes('y'))return cleanExpanded(`${previous[1]}+${Number(previous[2])+offset}`);
+   return cleanExpanded(`${m[1]}${offset<0?'-':'+'}${Math.abs(offset)}`.replace(/\+-/g,'-'));
+  }
+ }
+ // Symbolic answers should never show the generator's intermediate parentheses as final form.
+ if(spec.kind==='expanded-expression')return cleanExpanded(answer);
+ if(['simplified-expression','surd','factorised-expression'].includes(spec.kind)){
+  const m=/^\((.+)\)\+\((-?\d+)\)$/.exec(answer);
+  if(m){const v=Number(m[2]);return `${m[1]}${v<0?'-':'+'}${Math.abs(v)}`;}
+ }
+ return answer;
+}
+function commonMistakes(kind:string,p:Params,core:Core,answer:string):CommonWrongAnswer[]{
+ const {a,b,c,d,n,stage}=p;
+ const choices:CommonWrongAnswer[]=[];
+ function offer(value:string,reason:string){if(value!==answer&&!choices.some(x=>x.value===value))choices.push({value,reason});}
+ if(stage===2||stage===3){offer(core.answer,'You completed the first calculation but missed the extra instruction. Read the last sentence of the question.');}
+ if(kind==='index.product'&&stage<2)offer(`x^${a*b}`,'You multiplied the indices. When multiplying powers of the same base, add their indices.');
+ if(kind==='index.quotient'&&stage<2)offer(`x^${a+2*b}`,'You added indices. Divide powers of the same base by subtracting denominator index from numerator index.');
+ if(kind==='index.power'&&stage<2)offer(`x^${n+c}`,'A power raised to another power requires multiplying indices, not adding them.');
+ if(kind==='index.zero')offer('0','A non-zero number raised to zero is one, not zero.');
+ if(kind==='index.value')offer(String(a*n),'You multiplied the base by its index instead of multiplying the base repeatedly.');
+ if(kind==='percent.of')offer(String(a+b),'A percentage is a hundredth of the amount, not a number to add to it.');
+ if(kind==='percent.change')offer(String(b*100+a),'You added the percentage number directly instead of calculating that percent of the original price.');
+ if(kind==='percent.reverse')offer(String(b*100*(1+a/100)*(1-a/100)),'A reverse percentage needs division by the multiplier, not another percentage decrease.');
+ if(kind==='percent.compound'&&stage<4){const start=b*100,rate=a%15+5,years=n%3+2;offer(String(start*(1+rate*years/100)),'You used simple interest. Compound interest changes the balance each year.');}
+ if(kind==='fraction.add'&&stage<2)offer(`${a+c}/${b+d}`,'Do not add denominators. Convert to a common denominator first.');
+ if(kind==='fraction.multiply'&&stage<2)offer(`${a*c}/${b*d}`,'For division, invert the second fraction before multiplying.');
+ if(kind==='decimal.places'&&stage<2)offer(String(Number(core.answer).toFixed(p.n%3+1).slice(0,-1)),'You stopped one decimal place early. Check how many places the question requests.');
+ if(kind==='prime.hcf')offer(String(a*12),'You used the lowest common multiple instead of the highest common factor.');
+ if(kind==='prime.lcm')offer(String(a*3),'You used the highest common factor instead of the lowest common multiple.');
+ if(kind==='bounds.interval'&&stage<4)offer(String(a),'You omitted half the rounding unit. The upper bound is half a unit above the rounded value.');
+ return choices;
 }
 
 function scenario(kind:string,p:Params,coreAsk:string):string {
@@ -172,9 +262,36 @@ export function buildQuestion(templateId:string,params:Params,context:'exercise'
   promptText=(stage===2?`Simplify the expression, then add ${c}. `:stage===3?`Simplify, then subtract ${d}. `:stage===4?`Simplify the expression, then add ${c} groups of ${d}. `:`Simplify, then subtract ${c} and ${d}. `)+core.ask;
   workedSolution.push(`Apply the extra operation after simplifying: (${core.answer}) + (${offset}).`);
  }
+ correctAnswer=finalAnswer(templateId,p,correctAnswer,core);
+ let answerSpec=formFor(templateId,p);
+ if(answerSpec.kind==='integer'&&!/^-?\d+$/.test(correctAnswer))answerSpec={kind:'decimal'};
+ if(answerSpec.kind==='expanded-expression'&&/^-?\d+$/.test(correctAnswer))answerSpec={kind:'integer'};
+ let displayAnswer=answerSpec.kind==='decimal'&&answerSpec.decimalPlaces!==undefined?Number(correctAnswer).toFixed(answerSpec.decimalPlaces):correctAnswer;
+ if(answerSpec.kind==='decimal'&&answerSpec.significantFigures!==undefined){
+  const sig=answerSpec.significantFigures;
+  const precise=Number(displayAnswer).toPrecision(sig);
+  const digits=precise.split(/[eE]/)[0].replace('.','').replace(/^0+/,'').replace(/0+$/,'').length;
+  displayAnswer=digits===sig?precise:Number(displayAnswer).toExponential(sig-1);
+ }
+ correctAnswer=displayAnswer;
+ const commonWrongAnswers=commonMistakes(templateId,p,core,correctAnswer);
+ const validatedSteps:ValidatedStep[]=[];
+ if(p.stage>=4&&templateId==='percent.compound'){
+  const amount=b*100,r=a%15+5,years=p.n%3+2;
+  const compound=Number((amount*(1+r/100)**years).toFixed(2));
+  const simple=Number((amount*(1+r*years/100)).toFixed(2));
+  validatedSteps.push({label:'Step 1 · Compound balance',prompt:'Calculate the compound balance to 2 d.p.',correctAnswer:compound.toFixed(2),answerSpec:{kind:'decimal',decimalPlaces:2}},{label:'Step 2 · Simple-interest balance',prompt:'Calculate the simple-interest balance to 2 d.p.',correctAnswer:simple.toFixed(2),answerSpec:{kind:'decimal',decimalPlaces:2}});
+ }
+ if(p.stage>=4&&templateId==='bounds.area'){
+  validatedSteps.push({label:'Step 1 · Upper area bound',prompt:'Multiply both upper length bounds.',correctAnswer:String((a+.5)*(b+.5)),answerSpec:{kind:'decimal'}},{label:'Step 2 · Lower area bound',prompt:'Multiply both lower length bounds.',correctAnswer:String((a-.5)*(b-.5)),answerSpec:{kind:'decimal'}});
+ }
+ if(p.stage>=4&&templateId==='algebra.factor'){
+  const g=gcd(b,c),coefficient=a*g;
+  validatedSteps.push({label:'Step 1 · Common factor',prompt:'Enter the highest common factor including x (for example, 6*x).',correctAnswer:`${coefficient}*x`,answerSpec:{kind:'simplified-expression'}},{label:'Step 2 · Remaining bracket',prompt:'Enter the bracket after taking out the common factor.',correctAnswer:`(${b/g}*x+${c/g})`,answerSpec:{kind:'simplified-expression'}});
+ }
  const suffix=context==='example'?'example':'exercise';
  const id=`${suffix}:${templateId}:${stage}:${a}-${b}-${c}-${d}-${p.n}`;
- return {id,templateId,params:p,promptText,correctAnswer,acceptedForms:[correctAnswer],hint:[core.tip,`Start with the underlying rule and handle the additional operation only after the original calculation.`],workedSolution:[...workedSolution,`Final answer: ${correctAnswer}.`],tier:stage<2?'foundation':stage<4?'developing':'challenge'};
+ return {id,seed:`${templateId}:${a}-${b}-${c}-${d}-${p.n}:${stage}`,skillId:templateId,templateId,params:p,promptText,correctAnswer,acceptedForms:[correctAnswer],answerSpec,validatedSteps,commonWrongAnswers,hint:[core.tip,`Check the requested final form. Then use the rule to verify each step without changing the original quantities.`],workedSolution:[...workedSolution,`Final answer: ${correctAnswer}.`],tier:stage<2?'foundation':stage<4?'developing':'challenge'};
 }
 export function paramsKey(q:GeneratedMathQuestion):string {return `${q.templateId}|${Object.values(q.params).join(':')}`;}
 export function answerKey(answer:string):string {return answer.toLowerCase().replace(/\s/g,'').replace(/\*/g,'×');}
