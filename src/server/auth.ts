@@ -51,8 +51,6 @@ export async function createStudent(creatorId:string,usernameInput:string,displa
 export async function permanentlyRemoveStudent(client:PoolClient,studentId:string,teacherId:string){
  const {rows}=await client.query("SELECT id FROM users WHERE id=$1 AND role='student' AND password_hash<>$2 FOR UPDATE",[studentId,DELETED_ACCOUNT_PASSWORD_HASH]);
  if(!rows[0])throw new HttpError(404,'Student account not found or already removed');
- const {rows:chatTables}=await client.query("SELECT to_regclass('public.chat_threads') IS NOT NULL AS installed");
- if(chatTables[0]?.installed)await client.query('DELETE FROM chat_threads WHERE student_id=$1',[studentId]);
  await client.query('DELETE FROM sessions WHERE user_id=$1',[studentId]);
  await client.query('DELETE FROM used_questions WHERE user_id=$1',[studentId]);
  const anonymizedUsername=`deleted-${studentId.replace(/-/g,'').slice(0,28)}`;
