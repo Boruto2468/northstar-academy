@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS assessments(
  title text NOT NULL, creator_id uuid NOT NULL REFERENCES users(id),
  blueprint jsonb NOT NULL, opens_at timestamptz, closes_at timestamptz,
  duration_seconds integer NOT NULL CHECK(duration_seconds BETWEEN 60 AND 14400),
- results_release_at timestamptz, release_now boolean NOT NULL DEFAULT false,
+ results_release_at timestamptz, release_now boolean NOT NULL DEFAULT false, cancelled_at timestamptz,
  created_at timestamptz NOT NULL DEFAULT now(),
  CONSTRAINT exam_times CHECK (kind='test' OR (opens_at IS NOT NULL AND closes_at IS NOT NULL AND opens_at < closes_at))
 );

@@ -9,7 +9,7 @@ This project extends the **existing** Next.js 15/TypeScript Northstar lessons an
 ## Setup
 
 1. Create a private hosted Postgres project (Supabase → project → Database). Use Supabase's actual **Connect** URL, preferably a transaction-pooler URL on serverless Vercel. SSL must be enabled. **Do not place the Postgres URI in `NEXT_PUBLIC_*`**. All DB access stays server-side.
-2. Run `db/001_initial.sql` once in the database SQL editor. This defines 10 tables, constraints, indexes and disabled public browser access.
+2. Run `db/001_initial.sql` once in the database SQL editor. This defines the assessment schema, constraints, indexes and disabled public browser access. Existing deployments should run later numbered migrations as instructed.
 3. Create `.env.local` using `.env.example`. Set `DATABASE_URL` and a random, private `CRON_SECRET`. Don't commit `.env.local`.
 4. `npm install` then `npm test` and `npm run build`. `npm run dev` starts local Next.js including the API.
 5. Create your first teacher: set `INITIAL_TEACHER_USERNAME`, `INITIAL_TEACHER_NAME`, and `INITIAL_TEACHER_PASSWORD` in your terminal, then `node --env-file=.env.local scripts/create-teacher.mjs`. The teacher must be created *after* the migration.
@@ -26,7 +26,7 @@ This project extends the **existing** Next.js 15/TypeScript Northstar lessons an
 - Every attempt stores private marking snapshots separately from public question text and choice options. Private answers are not included in any student-facing API result before release.
 - **B1** `/tests`: choose topics, 2–50 questions and 1–240 minutes; presets; objective (2 marks) and theory (6 marks), with optional subparts; server autosave, question navigation, no feedback until submission; immediate A1-style review after submission.
 - **B2** `/login`, `/teacher`: teacher-created child accounts, teacher/student roles, database sessions, protected route handlers and rate-limited login.
-- **B3** `/teacher`: create exam schedules, choose topics or bank questions, random question/choice order per student, enforce one attempt per student, save answers, auto-submit at the earlier deadline, log tab departures without blocking, release results at the scheduled WAT time (never before closing), teacher grade overrides and a per-student breakdown.
+- **B3** `/teacher`: create, cancel and delete exam schedules; choose topics or bank questions; randomise question/choice order per student; enforce one attempt per student; save answers; auto-submit at the earlier deadline; log tab departures without blocking; release results at the scheduled WAT time (never before closing); teacher grade overrides and a per-student breakdown. Cancellation blocks new attempts while allowing current attempts to finish. Deletion permanently removes an exam and its attempts, answers, results and tab events.
 - **No repeats**: `used_questions(user_id, signature)` rejects reuse of the same generated parameter signature across assessment attempts. Teacher-selected bank questions previously used by the student are rejected instead of silently repeated. A student may run out of unique questions for a narrow set of skills; widen selected topics when necessary.
 - **Answer checking:** uses the Phase 1 required-form validator and immutable snapshots. Mathematical theory parts with final answers are automatically marked using an exact spec; lengthy free-text proofs are not automatically graded. Teacher mark overrides support moderation after submission. This release does not claim a comprehensive hand-marked WAEC paper bank.
 
@@ -54,6 +54,8 @@ The `tests/assessment-*.test.mjs` scripts check objective answer isolation and g
 ## Teacher administration
 
 The teacher can reset a student password (which revokes existing sessions) or deactivate a student account. Tests may be resumed from `/tests` after signing in again. For data-retention maintenance, see `scripts/maintenance.sql`, and agree on a school retention policy before deleting assessment records.
+
+Existing databases must run `db/002_exam_cancellation.sql` once before deploying exam cancellation. Permanent exam deletion is destructive and removes all associated student attempts and results; an audit record of the deletion is retained.
 
 ## Release boundaries
 

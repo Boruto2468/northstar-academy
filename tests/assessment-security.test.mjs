@@ -25,10 +25,29 @@ test('exam results stay hidden until submitted, closed and released',()=>{
 test('database constrains a student to one exam attempt and blocks browser direct table access',()=>{
  const schema=fs.readFileSync(new URL('../db/001_initial.sql',import.meta.url),'utf8');
  assert.match(schema,/UNIQUE INDEX IF NOT EXISTS one_exam_attempt/);
+ assert.match(schema,/cancelled_at timestamptz/);
  assert.match(schema,/WHERE kind='exam'/);
  assert.match(schema,/REVOKE ALL ON ALL TABLES IN SCHEMA public FROM anon, authenticated/);
  const sw=fs.readFileSync(new URL('../public/sw.js',import.meta.url),'utf8');
  assert.match(sw,/api\|login\|tests\|exams\|attempts\|teacher/);
+});
+test('existing databases can add exam cancellation state idempotently',()=>{
+ const migration=fs.readFileSync(new URL('../db/002_exam_cancellation.sql',import.meta.url),'utf8');
+ assert.match(migration,/ADD COLUMN IF NOT EXISTS cancelled_at timestamptz/);
+});
+test('cancelled exams cannot be started and active attempts are not changed by cancellation',()=>{
+ const assessments=fs.readFileSync(new URL('../src/server/assessments.ts',import.meta.url),'utf8');
+ const cancel=fs.readFileSync(new URL('../src/app/api/teacher/exams/[id]/cancel/route.ts',import.meta.url),'utf8');
+ assert.match(assessments,/if\(exam\.cancelled_at\)throw new HttpError\(403,'Exam has been cancelled'\)/);
+ assert.match(cancel,/UPDATE assessments SET cancelled_at=now\(\)/);
+ assert.doesNotMatch(cancel,/UPDATE attempts/);
+});
+test('deleting an exam removes its events and attempt records transactionally',()=>{
+ const route=fs.readFileSync(new URL('../src/app/api/teacher/exams/[id]/route.ts',import.meta.url),'utf8');
+ assert.match(route,/DELETE FROM exam_events/);
+ assert.match(route,/DELETE FROM attempts WHERE assessment_id=\$1/);
+ assert.match(route,/DELETE FROM assessments WHERE id=\$1/);
+ assert.match(route,/exam_delete/);
 });
 
 test('student in-progress attempt payload contains no secret, marking scheme or key',()=>{

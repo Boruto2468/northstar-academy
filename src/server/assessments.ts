@@ -85,6 +85,7 @@ export async function startExam(user:CurrentUser,assessmentId:string){
  return transaction(async client=>{
   const {rows}=await client.query(`SELECT * FROM assessments WHERE id=$1 AND kind='exam' FOR SHARE`,[assessmentId]);const exam=rows[0];
   if(!exam)throw new HttpError(404,'Exam not found');
+  if(exam.cancelled_at)throw new HttpError(403,'Exam has been cancelled');
   const {rows:clock}=await client.query('SELECT clock_timestamp() as now');const now=new Date(clock[0].now).getTime();
   if(now<new Date(exam.opens_at).getTime())throw new HttpError(403,'Exam has not opened');
   if(!isExamOpen(exam.opens_at.toISOString(),exam.closes_at.toISOString(),clock[0].now.toISOString()))throw new HttpError(403,'Exam is closed');
